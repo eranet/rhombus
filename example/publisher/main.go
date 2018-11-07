@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/l1va/rog"
-	"github.com/l1va/rog/example"
+	"rog"
+	"rog/example"
 )
 
 func main() {
