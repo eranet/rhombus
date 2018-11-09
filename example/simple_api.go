@@ -8,3 +8,15 @@ type Person struct {
 }
 
 const HelloTopic = "hello"
+
+type AddTwoInts struct {
+	A int
+	B int
+}
+
+type AddTwoIntsResponse struct {
+	C int
+	Comment string
+}
+
+const ServiceTopic = "service"
