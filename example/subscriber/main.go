@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/l1va/rog"
-	"github.com/l1va/rog/example"
+	"rog"
+	"rog/example"
 	"fmt"
 )
 
@@ -14,6 +14,5 @@ func main() {
 		fmt.Printf("Received a person: %+v\n", p)
 	})
 
-	rog.Listen()
-
+	c.Spin()
 }
