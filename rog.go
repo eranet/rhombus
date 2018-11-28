@@ -4,6 +4,7 @@ import (
 	"errors"
 	"reflect"
 	"time"
+
 	"github.com/nats-io/go-nats"
 )
 
@@ -17,11 +18,20 @@ type RogConnection struct {
 	c *nats.EncodedConn
 }
 
+func getConnection(encoder string) *RogConnection {
+	nc, _ := nats.Connect(nats.DefaultURL)
+	c, _ := nats.NewEncodedConn(nc, encoder)
+	return &RogConnection{c}
+}
+
 // Create a new connection to the messaging server
 func Connection() *RogConnection {
-	nc, _ := nats.Connect(nats.DefaultURL)
-	c, _ := nats.NewEncodedConn(nc, nats.JSON_ENCODER)
-	return &RogConnection{c}
+	return getConnection(nats.JSON_ENCODER)
+}
+
+// BinaryConnection for binary data
+func BinaryConnection() *RogConnection {
+	return getConnection(nats.DEFAULT_ENCODER)
 }
 
 // Subscribe to the given topic
@@ -45,7 +55,7 @@ func (rc *RogConnection) Publish(subj string, v interface{}) error {
 // vPtr: reply struct, must be pointer
 // timeout: timeout duration
 func (rc *RogConnection) RequestService(subj string, v interface{},
-		vPtr interface{}, timeout time.Duration) error {
+	vPtr interface{}, timeout time.Duration) error {
 	err := rc.c.Request(subj, v, vPtr, timeout)
 	return err
 }
@@ -66,7 +76,7 @@ func (rc *RogConnection) Service(subj string, cb Handler) error {
 	if cbType.NumIn() != 1 {
 		return errors.New("Handler needs to have 1 parameter")
 	}
-	if cbType.NumOut() != 1{
+	if cbType.NumOut() != 1 {
 		return errors.New("Handler needs to have 1 output parameter")
 	}
 	argType := cbType.In(0) // type of the first argument in callback function
