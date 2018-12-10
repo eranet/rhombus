@@ -1,4 +1,4 @@
-package rog
+package roms
 
 import (
 	"errors"
@@ -14,30 +14,30 @@ import (
 // back into the appropriate struct based on the signature of the Handler.
 type Handler interface{}
 
-type RogConnection struct {
+type RomsConnection struct {
 	c *nats.EncodedConn
 }
 
-func getConnection(encoder string) *RogConnection {
-	nc, _ := nats.Connect(nats.DefaultURL)
+func getConnection(serverURL string, encoder string) *RomsConnection {
+	nc, _ := nats.Connect(serverURL)
 	c, _ := nats.NewEncodedConn(nc, encoder)
-	return &RogConnection{c}
+	return &RomsConnection{c}
 }
 
 // Create a new connection to the messaging server
-func Connection() *RogConnection {
-	return getConnection(nats.JSON_ENCODER)
+func Connection(serverURL string) *RomsConnection {
+	return getConnection(serverURL, nats.JSON_ENCODER)
 }
 
 // BinaryConnection for binary data
-func BinaryConnection() *RogConnection {
-	return getConnection(nats.DEFAULT_ENCODER)
+func BinaryConnection(serverURL string) *RomsConnection {
+	return getConnection(serverURL, nats.DEFAULT_ENCODER)
 }
 
 // Subscribe to the given topic
 // subj: topic
 // cb: callback function, must receive one struct parameter
-func (rc *RogConnection) Subscribe(subj string, cb Handler) error {
+func (rc *RomsConnection) Subscribe(subj string, cb Handler) error {
 	_, err := rc.c.Subscribe(subj, cb)
 	return err
 }
@@ -45,26 +45,26 @@ func (rc *RogConnection) Subscribe(subj string, cb Handler) error {
 // Publish a struct to given topic
 // subj: topic
 // v: struct
-func (rc *RogConnection) Publish(subj string, v interface{}) error {
+func (rc *RomsConnection) Publish(subj string, v interface{}) error {
 	return rc.c.Publish(subj, v)
 }
 
-// Publish a request to given service and wait
+// Publish a request to given responder_ms and wait
 // subj: topic
 // v: request struct
 // vPtr: reply struct, must be pointer
 // timeout: timeout duration
-func (rc *RogConnection) RequestService(subj string, v interface{},
+func (rc *RomsConnection) Request(subj string, v interface{},
 	vPtr interface{}, timeout time.Duration) error {
 	err := rc.c.Request(subj, v, vPtr, timeout)
 	return err
 }
 
-// Advertise a service
+// Advertise a responder_ms
 // subj: topic
 // cb: callback function, must receive 1 struct parameter
 // and return 1 struct output
-func (rc *RogConnection) Service(subj string, cb Handler) error {
+func (rc *RomsConnection) Service(subj string, cb Handler) error {
 	// need to do a little bit of reflect magic
 	// in order to be able to receive callback of any type
 	// (inspired by go-nats client)
@@ -105,12 +105,12 @@ func (rc *RogConnection) Service(subj string, cb Handler) error {
 }
 
 // method for waiting until the process is terminated
-func (rc *RogConnection) Spin() {
+func (rc *RomsConnection) Spin() {
 	doneChan := make(chan struct{})
 	<-doneChan
 }
 
 // close connection to the messaging server
-func (rc *RogConnection) Close() {
+func (rc *RomsConnection) Close() {
 	rc.c.Close()
 }

@@ -6,13 +6,13 @@ import (
 	"strconv"
 	"time"
 
-	"rog"
-	"rog/example"
+	"github.com/l1va/roms"
+	"github.com/l1va/roms/example/reqresp"
 )
 
 func main() {
 	if len(os.Args) != 3 {
-		fmt.Println("Usage: ./requester a b")
+		fmt.Println("Usage: ./requester_ms a b")
 		os.Exit(1)
 	}
 	a, err := strconv.Atoi(os.Args[1])
@@ -24,12 +24,12 @@ func main() {
 		panic(err)
 	}
 
-	c := rog.Connection()
+	c := roms.Connection(reqresp.ServerURL)
 	defer c.Close()
 
-	req := example.AddTwoInts{A: a, B: b}
-	var res example.AddTwoIntsResponse
-	err = c.RequestService(example.ServiceTopic, &req, &res, time.Second)
+	req := reqresp.AddTwoIntsRequest{A: a, B: b}
+	var res reqresp.SumResponse
+	err = c.Request(reqresp.SumServiceTopic, &req, &res, time.Second)
 
 	if err != nil {
 		fmt.Println("Received an error: ", err.Error())
