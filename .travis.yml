@@ -3,9 +3,9 @@ language: go
 go:
   - 1.9
   - "1.10"
-  - tip
+  #- tip
 
 install:
-  - apt-get install  libopencv-dev
+  - sudo apt-get install libopencv-dev
   - go get github.com/nats-io/go-nats
   - go get -u -d gocv.io/x/gocv
