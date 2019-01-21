@@ -6,7 +6,6 @@ go:
   - tip
 
 install:
-  - pip install --upgrade pip --user
-  - pip install opencv-python --user
+  - apt-get install  libopencv-dev
   - go get github.com/nats-io/go-nats
   - go get -u -d gocv.io/x/gocv
