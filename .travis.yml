@@ -6,5 +6,6 @@ go:
   #- tip
 
 install:
+  - make install
   - go get -t -v ./...
 
