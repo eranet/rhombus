@@ -25,6 +25,11 @@ func getConnection(serverURL string, encoder string) *RomsConnection {
 }
 
 // Create a new connection to the messaging server
+func LocalConnection() *RomsConnection {
+	return getConnection(nats.DefaultURL, nats.JSON_ENCODER)
+}
+
+// Create a new connection to the messaging server
 func Connection(serverURL string) *RomsConnection {
 	return getConnection(serverURL, nats.JSON_ENCODER)
 }

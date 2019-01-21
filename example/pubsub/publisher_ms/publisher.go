@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	c := roms.Connection(pubsub.ServerURL)
+	c := roms.LocalConnection()
 	defer c.Close()
 
 	r := roms.NewRate(10) // 10 hz

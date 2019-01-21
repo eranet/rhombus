@@ -12,7 +12,7 @@ func sumHandler(r *reqresp.AddTwoIntsRequest) *reqresp.SumResponse {
 }
 
 func main() {
-	c := roms.Connection(reqresp.ServerURL)
+	c := roms.LocalConnection()
 	defer c.Close()
 
 	c.Service(reqresp.SumServiceTopic, sumHandler)

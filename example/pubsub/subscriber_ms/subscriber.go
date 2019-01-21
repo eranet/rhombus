@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	c := roms.Connection(pubsub.ServerURL)
+	c := roms.LocalConnection()
 	defer c.Close()
 
 	c.Subscribe(pubsub.HelloTopic, func(p *pubsub.Person) {

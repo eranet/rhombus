@@ -1,6 +1,5 @@
 package webcam
-import "github.com/nats-io/go-nats"
 
-const ServerURL = nats.DefaultURL
+const ServerURL = "nats://localhost:4222"
 
 const WebcamTopic = "webcam"

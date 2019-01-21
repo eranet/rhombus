@@ -24,7 +24,7 @@ func main() {
 		panic(err)
 	}
 
-	c := roms.Connection(reqresp.ServerURL)
+	c := roms.LocalConnection()
 	defer c.Close()
 
 	req := reqresp.AddTwoIntsRequest{A: a, B: b}

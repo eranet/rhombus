@@ -1,11 +1,11 @@
 language: go
 
 go:
-  - 1.8
   - 1.9
   - "1.10"
   - tip
 
 install:
+  - pip install opencv-python
   - go get github.com/nats-io/go-nats
   - go get -u -d gocv.io/x/gocv
