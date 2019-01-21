@@ -6,6 +6,5 @@ go:
   #- tip
 
 install:
-  - sudo apt-get install libopencv-dev
-  - go get github.com/nats-io/go-nats
-  - go get -u -d gocv.io/x/gocv
+  - go get -t -v ./...
+
