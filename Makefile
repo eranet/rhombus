@@ -46,7 +46,7 @@ download:
 	curl -Lo opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/$(OPENCV_VERSION).zip
 	unzip -q opencv_contrib.zip
 	rm opencv.zip opencv_contrib.zip
-	cd -
+
 
 # Build OpenCV.
 build:
