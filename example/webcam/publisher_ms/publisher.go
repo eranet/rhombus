@@ -1,21 +1,21 @@
 package main
 
 import (
-	"github.com/l1va/roms"
-	"github.com/l1va/roms/example/webcam"
+	"github.com/l1va/rhombus"
+	"github.com/l1va/rhombus/example/webcam"
 
 	//"gocv.io/x/gocv"
 )
 
 func main() {
-	c := roms.BinaryConnection(webcam.ServerURL)
+	c := rhombus.BinaryConnection(webcam.ServerURL)
 	defer c.Close()
 
 	//commented for successful build on travis
 	// (opencv4 should be installed, but it is not 5 min,
 	// you can help with it)
 
-	/*rate := roms.NewRate(1)
+	/*rate := rhombus.NewRate(1)
 
 	cam, _ := gocv.OpenVideoCapture(0)
 	defer cam.Close()

@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/l1va/roms"
-	"github.com/l1va/roms/example/reqresp"
+	"github.com/l1va/rhombus"
+	"github.com/l1va/rhombus/example/reqresp"
 )
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 		panic(err)
 	}
 
-	c := roms.LocalConnection()
+	c := rhombus.LocalConnection()
 	defer c.Close()
 
 	req := reqresp.AddTwoIntsRequest{A: a, B: b}

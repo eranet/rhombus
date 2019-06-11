@@ -1,9 +1,9 @@
 
-# RoMS
+# RhoMBus
 
-[![Build Status](https://travis-ci.org/l1va/roms.svg?branch=master)](https://travis-ci.org/l1va/roms)
+[![Build Status](https://travis-ci.org/l1va/rhombus.svg?branch=master)](https://travis-ci.org/l1va/rhombus)
 
-<b>This is ROS competitor written in 100 lines. Robotics MicroServices.</b> 
+<b>This is ROS competitor written in 100 lines. Robotic MicroService Bus.</b> 
 
 The main idea - to use [NATS](https://nats.io/) message queue as a 
 master or server.
@@ -14,3 +14,5 @@ You can use any language in microservices: NATS supports a lot of
  ### Run
  Just start NATS server (run_server.sh) and you can run any microservice 
  (see examples) without annoying CMakeLists.txt, package.xml, catkin, etc. 
+ 
+ 

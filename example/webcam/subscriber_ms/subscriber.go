@@ -2,8 +2,8 @@ package main
 
 import (
 	"io/ioutil"
-	"github.com/l1va/roms"
-	"github.com/l1va/roms/example/webcam"
+	"github.com/l1va/rhombus"
+	"github.com/l1va/rhombus/example/webcam"
 )
 
 func photoSaver(data []byte) {
@@ -11,7 +11,7 @@ func photoSaver(data []byte) {
 }
 
 func main() {
-	c := roms.BinaryConnection(webcam.ServerURL)
+	c := rhombus.BinaryConnection(webcam.ServerURL)
 	defer c.Close()
 
 	c.Subscribe(webcam.WebcamTopic, photoSaver)

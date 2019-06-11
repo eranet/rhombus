@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/l1va/roms"
-	"github.com/l1va/roms/example/pubsub"
+	"github.com/l1va/rhombus"
+	"github.com/l1va/rhombus/example/pubsub"
 )
 
 func main() {
-	c := roms.LocalConnection()
+	c := rhombus.LocalConnection()
 	defer c.Close()
 
-	r := roms.NewRate(10) // 10 hz
+	r := rhombus.NewRate(10) // 10 hz
 
 	cnt := 0
 	for {
