@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/l1va/rhombus/gorhom"
+	"github.com/l1va/rhombus/gorhom/example/reqresp"
 	"os"
 	"strconv"
 	"time"
-
-	"github.com/l1va/rhombus"
-	"github.com/l1va/rhombus/example/reqresp"
 )
 
 func main() {
@@ -24,7 +23,7 @@ func main() {
 		panic(err)
 	}
 
-	c := rhombus.LocalConnection()
+	c := gorhom.LocalJSONConnection()
 	defer c.Close()
 
 	req := reqresp.AddTwoIntsRequest{A: a, B: b}

@@ -1,4 +1,4 @@
-package rhombus
+package gorhom
 
 import (
 	"errors"
@@ -24,13 +24,18 @@ func getConnection(serverURL string, encoder string) *RhombusConnection {
 	return &RhombusConnection{c}
 }
 
-// Create a new connection to the messaging server
-func LocalConnection() *RhombusConnection {
+// LocalJSONConnection create a new connection to the local messaging server with json encoder
+func LocalJSONConnection() *RhombusConnection {
 	return getConnection(nats.DefaultURL, nats.JSON_ENCODER)
 }
 
-// Create a new connection to the messaging server
-func Connection(serverURL string) *RhombusConnection {
+// LocalBinaryConnection create a new connection to the local messaging server with binary encoder
+func LocalBinaryConnection() *RhombusConnection {
+	return getConnection(nats.DefaultURL, nats.DEFAULT_ENCODER)
+}
+
+// JSONConnection create a new connection to the messaging server with json encoder
+func JSONConnection(serverURL string) *RhombusConnection {
 	return getConnection(serverURL, nats.JSON_ENCODER)
 }
 

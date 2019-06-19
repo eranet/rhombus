@@ -2,3 +2,4 @@ ar.sublime*
 .idea/
 bin/
 *.jpg
+build

@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/l1va/rhombus"
-	"github.com/l1va/rhombus/example/pubsub"
 	"fmt"
+	"github.com/l1va/rhombus/gorhom"
+	"github.com/l1va/rhombus/gorhom/example/pubsub"
 )
 
 func main() {
-	c := rhombus.LocalConnection()
+	c := gorhom.LocalJSONConnection()
 	defer c.Close()
 
 	c.Subscribe(pubsub.HelloTopic, func(p *pubsub.Person) {

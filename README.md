@@ -13,6 +13,7 @@ You can use any language in microservices: NATS supports a lot of
 
  ### Run
  Just start NATS server (run_server.sh) and you can run any microservice 
- (see examples) without annoying CMakeLists.txt, package.xml, catkin, etc. 
+ (by simple python or golang, see examples) without annoying CMakeLists.txt, 
+ package.xml, catkin, etc. 
  
  

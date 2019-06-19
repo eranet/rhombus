@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/l1va/rhombus"
-	"github.com/l1va/rhombus/example/reqresp"
+	"github.com/l1va/rhombus/gorhom"
+	"github.com/l1va/rhombus/gorhom/example/reqresp"
 )
 
 func sumHandler(r *reqresp.AddTwoIntsRequest) *reqresp.SumResponse {
@@ -12,7 +12,7 @@ func sumHandler(r *reqresp.AddTwoIntsRequest) *reqresp.SumResponse {
 }
 
 func main() {
-	c := rhombus.LocalConnection()
+	c := gorhom.LocalJSONConnection()
 	defer c.Close()
 
 	c.Service(reqresp.SumServiceTopic, sumHandler)

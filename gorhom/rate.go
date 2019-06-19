@@ -1,4 +1,4 @@
-package rhombus
+package gorhom
 
 import (
 	"time"
@@ -6,8 +6,8 @@ import (
 
 // Convenience type for sleeping in a loop at a
 // specified rate
-type Rate struct{
-	dur time.Duration
+type Rate struct {
+	dur      time.Duration
 	lastTime time.Time
 }
 
@@ -15,7 +15,7 @@ type Rate struct{
 // freq: desired rate to run at in Hz
 func NewRate(freq uint) *Rate {
 	return &Rate{
-		dur: time.Duration(1e9 / freq) * time.Nanosecond,
+		dur:      time.Duration(1e9/freq) * time.Nanosecond,
 		lastTime: time.Now(),
 	}
 }
@@ -28,7 +28,7 @@ func (r *Rate) Sleep() {
 
 	// detect time jumping backwards of forwards
 	if r.lastTime.After(currTime) ||
-		currTime.Sub(r.lastTime) > r.dur * 2 {
+		currTime.Sub(r.lastTime) > r.dur*2 {
 		r.lastTime = currTime
 	} else {
 		r.lastTime = r.lastTime.Add(r.dur)

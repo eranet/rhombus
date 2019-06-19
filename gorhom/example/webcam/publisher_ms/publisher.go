@@ -1,19 +1,19 @@
 package main
 
 import (
-	"github.com/l1va/rhombus"
-	"github.com/l1va/rhombus/example/webcam"
+	"github.com/l1va/rhombus/gorhom"
+	//"github.com/l1va/rhombus/gorhom/example/webcam"
 
 	//"gocv.io/x/gocv"
 )
 
 func main() {
-	c := rhombus.BinaryConnection(webcam.ServerURL)
+	c := gorhom.LocalBinaryConnection()
 	defer c.Close()
 
 	//commented for successful build on travis
-	// (opencv4 should be installed, but it is not 5 min,
-	// you can help with it)
+	// (opencv4 should be installed,
+	// you can help with commands for travis)
 
 	/*rate := rhombus.NewRate(1)
 
