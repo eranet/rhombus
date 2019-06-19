@@ -3,3 +3,4 @@ ar.sublime*
 bin/
 *.jpg
 build
+joint_state

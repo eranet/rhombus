@@ -1,1 +1,1 @@
-./server/gnatsd
+./server/gnatsd -DV
