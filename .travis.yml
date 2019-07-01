@@ -10,6 +10,6 @@ env:
 
 script:
   - go build ./gorhom/
-  - go build ./gazebo/publish_cmd.go
-  - go build ./gazebo/joint_state.go
+  - go build ./gazebo/pub/publish_cmd.go
+  - go build ./gazebo/sub/joint_state.go
 
