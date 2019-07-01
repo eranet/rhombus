@@ -274,7 +274,9 @@
         <gripper_link>left_finger_tip</gripper_link>
         <palm_link>palm</palm_link>
       </gripper>
+
       <plugin name="joint_state_publisher" filename="libjoint_state_publisher.so"/>
+
     </model>
   </world>
 </sdf>

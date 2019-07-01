@@ -1,14 +1,10 @@
 package main
 
 import (
-
-	"sync"
-
+	"fmt"
 	"github.com/l1va/rhombus/gorhom"
+	"time"
 )
-
-// create wait group
-var wg sync.WaitGroup
 
 type JointState struct {
 	Name     []string
@@ -22,7 +18,10 @@ func main() {
 
 	println("before")
 	c.Subscribe("simple_gripper/joint_states", func(js *JointState) {
-		println("Received a msg: %+v\n", js)
+		t := time.Now()
+		println("Received a msg:", t.UnixNano()/1000000.0)
+		fmt.Printf("%+v\n", js)
+
 	})
 
 	println("after")

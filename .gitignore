@@ -4,3 +4,4 @@ bin/
 *.jpg
 build
 joint_state
+publish_cmd

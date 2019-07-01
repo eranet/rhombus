@@ -3,6 +3,9 @@
 #include <gazebo/common/common.hh>
 #include <nats/nats.h>
 
+#include <json.hpp>
+using json = nlohmann::json;
+
 namespace gazebo {
 class JointStatePublisher : public ModelPlugin {
 public:
@@ -11,10 +14,12 @@ public:
 	void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
 	void OnUpdate();
 	void publishJointStates();
+
+	physics::ModelPtr parent_;
 private:
 	event::ConnectionPtr updateConnection;
 	physics::WorldPtr world_;
-	physics::ModelPtr parent_;
+
 
 	// Update Rate
 	double update_rate_;
