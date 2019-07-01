@@ -12,8 +12,16 @@ You can use any language in microservices: NATS supports a lot of
 [clients](https://nats.io/download/)
 
  ### Run
- Just start NATS server (run_server.sh) and you can run any microservice 
- (by simple python or golang, see examples) without annoying CMakeLists.txt, 
+Just start NATS server 
+    
+    ./run_server.sh
+and then run any microservice
+    
+    go run rhomgo/example/pubsub/subsriber_ms/subscriber.go  
+    go run rhomgo/example/pubsub/publisher_ms/publisher.go
+ (python or golang, see examples) without annoying CMakeLists.txt, 
  package.xml, catkin, etc. 
  
+ ### Full App example (Gazebo + RhoMGo)
+ https://github.com/l1va/rhombus_example
  
