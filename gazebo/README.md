@@ -21,5 +21,4 @@
 
 - Launch nats server
 - `./launch_world.sh gripper.world`
-- `go build golang/joint_state.go`
-- `./joint_state`
+- `go run sub/joint_state.go`

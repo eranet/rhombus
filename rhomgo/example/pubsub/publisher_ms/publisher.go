@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/l1va/rhombus/gorhom"
-	"github.com/l1va/rhombus/gorhom/example/pubsub"
+	"github.com/l1va/rhombus/rhomgo"
+	"github.com/l1va/rhombus/rhomgo/example/pubsub"
 )
 
 func main() {
-	c := gorhom.LocalJSONConnection()
+	c := rhomgo.LocalJSONConnection()
 	defer c.Close()
 
-	r := gorhom.NewRate(10) // 10 hz
+	r := rhomgo.NewRate(10) // 10 hz
 
 	cnt := 0
 	for {

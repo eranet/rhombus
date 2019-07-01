@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/l1va/rhombus/gorhom"
+	"github.com/l1va/rhombus/rhomgo"
 	//"github.com/l1va/rhombus/gorhom/example/webcam"
 
 	//"gocv.io/x/gocv"
 )
 
 func main() {
-	c := gorhom.LocalBinaryConnection()
+	c := rhomgo.LocalBinaryConnection()
 	defer c.Close()
 
 	//commented for successful build on travis

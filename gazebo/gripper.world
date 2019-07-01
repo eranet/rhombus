@@ -12,6 +12,9 @@
     </include>
 
     <model name="simple_gripper">
+
+    <plugin name="any_plugin_name" filename="librhombus_gazebo_plugin.so"/>
+
       <link name="riser">
         <pose>-0.15 0.0 0.5 0 0 0</pose>
         <inertial>
@@ -275,7 +278,7 @@
         <palm_link>palm</palm_link>
       </gripper>
 
-      <plugin name="joint_state_publisher" filename="libjoint_state_publisher.so"/>
+
 
     </model>
   </world>

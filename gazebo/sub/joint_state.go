@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/l1va/rhombus/gorhom"
+	"github.com/l1va/rhombus/rhomgo"
 	"time"
 )
 
@@ -13,7 +13,7 @@ type JointState struct {
 }
 
 func main() {
-	c := gorhom.LocalJSONConnection()
+	c := rhomgo.LocalJSONConnection()
 	defer c.Close()
 
 	println("before")

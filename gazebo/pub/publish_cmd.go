@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/l1va/rhombus/gorhom"
+	"github.com/l1va/rhombus/rhomgo"
 )
 
 type Position struct {
@@ -9,7 +9,7 @@ type Position struct {
 }
 
 func main() {
-	c := gorhom.LocalJSONConnection()
+	c := rhomgo.LocalJSONConnection()
 	defer c.Close()
 
 	println("before")

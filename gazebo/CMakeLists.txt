@@ -6,5 +6,5 @@ include_directories(src ${GAZEBO_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 
-add_library(joint_state_publisher SHARED src/joint_state_publisher.cpp)
-target_link_libraries(joint_state_publisher nats ${GAZEBO_LIBRARIES})
+add_library(rhombus_gazebo_plugin SHARED src/joint_state_publisher.cpp)
+target_link_libraries(rhombus_gazebo_plugin nats ${GAZEBO_LIBRARIES})
