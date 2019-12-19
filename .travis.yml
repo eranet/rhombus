@@ -9,7 +9,7 @@ env:
   - GO111MODULE=on
 
 script:
-  - go build ./gorhom/
+  - go build ./rhomgo/
   - go build ./gazebo/pub/publish_cmd.go
   - go build ./gazebo/sub/joint_state.go
 

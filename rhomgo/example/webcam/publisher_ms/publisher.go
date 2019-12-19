@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/l1va/rhombus/rhomgo"
-	//"github.com/l1va/rhombus/gorhom/example/webcam"
+	//"github.com/l1va/rhombus/rhomgo/example/webcam"
 
 	//"gocv.io/x/gocv"
 )

@@ -1,6 +1,6 @@
 #include "joint_state_publisher.h"
 
-//TODO: REFACTORME! FIX THIS FUCKING C
+//TODO: REFACTORME!
 
 using namespace gazebo;
 
@@ -14,18 +14,8 @@ JointStatePublisher::~JointStatePublisher()
 
 static void OnMsg(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)
 {
-    //Cut middle from: simple_gripper/right_finger_tip/command
-    std::string subj = natsMsg_GetSubject(msg) ;
-    subj = subj.substr(0, subj.rfind("/"));
-    std::string name = subj.substr(subj.rfind("/")+1);
-    //std::cout <<  name ;
-
     auto x = json::parse(natsMsg_GetData(msg));
-    //std::cout << " Command: "<< x["Value"] << std::endl;
-
-    JointStatePublisher* jsp =  (JointStatePublisher*) closure; //SHIT
-
-    physics::JointPtr joint = jsp->parent_->GetJoint(name);
+    physics::Joint* joint = (physics::Joint*) closure;
     joint->SetPosition(0,x["Value"], true);
 
     // Don't forget to destroy the message!
@@ -73,7 +63,8 @@ void JointStatePublisher::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     for (int i = 0; i < joints.size(); i++) {
         name = joints[i]-> GetName();
         natsSubscription    *sub = NULL;
-        natsConnection_Subscribe(&sub, this->nats_conn, (robotNS+"/"+ name+"/command").c_str(),OnMsg , this);
+        //natsConnection_Subscribe(&sub, this->nats_conn, (robotNS+"/"+ name+"/command").c_str(),OnMsg , &(joints[i]));
+        natsConnection_Subscribe(&sub, this->nats_conn, (robotNS+"/"+ name+"/command").c_str(),OnMsg , joints[i].get());
     }
 }
 
