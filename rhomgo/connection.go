@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/nats-io/go-nats"
+	"github.com/nats-io/nats.go"
 )
 
 // Handler is a specific callback used for Subscribe. It is generalized to
