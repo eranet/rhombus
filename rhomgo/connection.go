@@ -15,13 +15,14 @@ import (
 type Handler interface{}
 
 type RhombusConnection struct {
-	c *nats.EncodedConn
+	c        *nats.EncodedConn
+	doneChan chan struct{}
 }
 
 func getConnection(serverURL string, encoder string) *RhombusConnection {
 	nc, _ := nats.Connect(serverURL)
 	c, _ := nats.NewEncodedConn(nc, encoder)
-	return &RhombusConnection{c}
+	return &RhombusConnection{c, make(chan struct{})}
 }
 
 // LocalJSONConnection create a new connection to the local messaging server with json encoder
@@ -116,8 +117,12 @@ func (rc *RhombusConnection) Service(subj string, cb Handler) error {
 
 // method for waiting until the process is terminated
 func (rc *RhombusConnection) Spin() {
-	doneChan := make(chan struct{})
-	<-doneChan
+	<-rc.doneChan
+}
+
+// method for waiting until the process is terminated
+func (rc *RhombusConnection) SpinDone() {
+	rc.doneChan <- struct{}{}
 }
 
 // close connection to the messaging server
