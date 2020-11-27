@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/l1va/rhombus/rhomgo"
-	//"github.com/l1va/rhombus/rhomgo/example/webcam"
+	"github.com/eranet/rhombus/rhomgo"
+	//"github.com/eranet/rhombus/rhomgo/example/webcam"
 
 	//"gocv.io/x/gocv"
 )

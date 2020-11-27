@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/l1va/rhombus/rhomgo"
-	"github.com/l1va/rhombus/rhomgo/example/reqresp"
+	"github.com/eranet/rhombus/rhomgo"
+	"github.com/eranet/rhombus/rhomgo/example/reqresp"
 )
 
 func sumHandler(r *reqresp.AddTwoIntsRequest) *reqresp.SumResponse {

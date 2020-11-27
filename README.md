@@ -1,7 +1,7 @@
 
 # RhoMBus
 
-[![Build Status](https://travis-ci.org/l1va/rhombus.svg?branch=master)](https://travis-ci.org/l1va/rhombus)
+[![Build Status](https://travis-ci.org/eranet/rhombus.svg?branch=master)](https://travis-ci.org/eranet/rhombus)
 
 <b>This is ROS competitor written in 100 lines. Robotic MicroService Bus.</b> 
 
@@ -17,11 +17,11 @@ Just start NATS server
     ./run_server.sh
 and then run any microservice
     
-    go run rhomgo/example/pubsub/subsriber_ms/subscriber.go  
+    go run rhomgo/example/pubsub/subscriber_ms/subscriber.go  
     go run rhomgo/example/pubsub/publisher_ms/publisher.go
  (python or golang, see examples) without annoying CMakeLists.txt, 
  package.xml, catkin, etc. 
  
  ### Full App example (Gazebo + RhoMGo)
- https://github.com/l1va/rhombus_example
+ https://github.com/eranet/rhombus_example
  

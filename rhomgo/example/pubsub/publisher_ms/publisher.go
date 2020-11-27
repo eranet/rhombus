@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/l1va/rhombus/rhomgo"
-	"github.com/l1va/rhombus/rhomgo/example/pubsub"
+	"github.com/eranet/rhombus/rhomgo"
+	"github.com/eranet/rhombus/rhomgo/example/pubsub"
 )
 
 func main() {

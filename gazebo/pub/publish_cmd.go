@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/l1va/rhombus/rhomgo"
+	"github.com/eranet/rhombus/rhomgo"
 )
 
 type Position struct {

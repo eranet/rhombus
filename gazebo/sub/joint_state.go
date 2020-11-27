@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/l1va/rhombus/rhomgo"
+	"github.com/eranet/rhombus/rhomgo"
 	"time"
 )
 
