@@ -12,14 +12,27 @@ JointStatePublisher::~JointStatePublisher()
 	}
 }
 
+typedef struct
+{
+  physics::JointControllerPtr jointController;
+  std::string name;
+}ParamStruct;
+
+
 static void OnMsg(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)
 {
     auto x = json::parse(natsMsg_GetData(msg));
-    physics::Joint* joint = (physics::Joint*) closure;
-    joint->SetPosition(0,x["Value"], true);
-
+    //std::cout << "1: \n" ;
+    ParamStruct* p = (ParamStruct*) closure;
+    //std::cout << "2: \n" ;
+    //physics::JointControllerPtr joint = p->joint;
+    //std::cout << "3: \n" ;
+    //std::cout << p->name << "4: \n" ;
+    p->jointController->SetPositionTarget(p->name,x["Value"]);
+    //free(closure);
     // Don't forget to destroy the message!
     natsMsg_Destroy(msg);
+    //std::cout << "5: \n" ;
 }
 
 void JointStatePublisher::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
@@ -52,20 +65,44 @@ void JointStatePublisher::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 
 	// Nats connect
 	natsStatus s;
-	s = natsConnection_ConnectTo(&this->nats_conn, NATS_DEFAULT_URL);
+	s = natsConnection_ConnectTo(&this->nats_conn, NATS_DEFAULT_URL); //TODO: default url
 
 	// bind on update
 	this->updateConnection = event::Events::ConnectWorldUpdateBegin(
 			std::bind(&JointStatePublisher::OnUpdate, this));
+
+    physics::JointControllerPtr jc = this->parent_->GetJointController();
+    std::map<std::string, physics::JointPtr> mjc = jc->GetJoints();
+    for( auto const& [key, val] : mjc )
+{
+    std::cout << key         // string (key)
+              << ':'
+              << val->GetName()        // string's value
+              << std::endl ;
+}
 
     std::string name = "";
     std::vector<physics::JointPtr> joints = this->parent_->GetJoints();
     for (int i = 0; i < joints.size(); i++) {
         name = joints[i]-> GetName();
         natsSubscription    *sub = NULL;
+        std::cout << "Name: " << joints[i]->GetName() << "\n";
+        std::cout << "Scoped Name: " << joints[i]->GetScopedName() << "\n";
         //natsConnection_Subscribe(&sub, this->nats_conn, (robotNS+"/"+ name+"/command").c_str(),OnMsg , &(joints[i]));
-        natsConnection_Subscribe(&sub, this->nats_conn, (robotNS+"/"+ name+"/command").c_str(),OnMsg , joints[i].get());
+        ParamStruct* p = new ParamStruct();
+        //std::cout << "Crea: ";
+        p->jointController = jc;
+        //std::cout << "set1: ";
+        p->name = joints[i]->GetScopedName();
+        //std::cout << "set2: ";
+        //std::tuple<physics::JointPtr, std::string> param = std::make_tuple(joints[i].get(), joints[i]->GetScopedName());
+        natsConnection_Subscribe(&sub, this->nats_conn, (robotNS+"/"+ name+"/command").c_str(),OnMsg , p);
+
+        gazebo::common::PID pid = gazebo::common::PID(1000,1,0.1,100,0.0,-1.0,0.0);
+        jc->SetPositionPID(joints[i]-> GetScopedName(), pid);
     }
+    jc->Update();
+
 }
 
 void JointStatePublisher::OnUpdate()

@@ -20,5 +20,9 @@
 ## Testing
 
 - Launch nats server
-- `./launch_world.sh gripper.world`
+- `./launch_world.sh`
 - `go run sub/joint_state.go`
+- `go run pub/publish_cmd.go`
+
+## Conversion
+gz sdf -p my_urdf.urdf > my_sdf.sdf
